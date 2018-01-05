@@ -4,6 +4,7 @@
 
 [link-prevue Demo](https://link-prevue.herokuapp.com/)
 
+<<<<<<< HEAD
 [link-prevue Demo Repo](https://github.com/nivaldomartinez/link-prevue-demo)
 
 ## Install GoDep
@@ -58,3 +59,6 @@ $ heroku open
 ```
 
 :heart:
+=======
+[link-prevue Demo Repo](https://github.com/nivaldomartinez/link-prevue-demo)
+>>>>>>> 7f1e96fda0fd823e25a29dd6520029596db9efe5
