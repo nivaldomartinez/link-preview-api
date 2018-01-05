@@ -8,6 +8,7 @@ import (
 	"os"
 	"net/http"
 	"github.com/badoux/goscraper"
+	"github.com/gorilla/handlers"
 )
 
 func getUrlData(w http.ResponseWriter, r *http.Request) {
@@ -35,9 +36,22 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", getUrlData).Methods("POST")
 	router.HandleFunc("/", getUrl).Methods("GET")
-	http.ListenAndServe(GetPort(), router)
+
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})
+	originsOk := handlers.AllowedOrigins([]string{GetOrigins()})
+	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})
+
+	http.ListenAndServe(GetPort(), handlers.CORS(originsOk, headersOk, methodsOk)(router))
 }
 
+func GetOrigins() string {
+	var origin = os.Getenv("ORIGIN_ALLOWED")
+	if origin == "" {
+		origin = "*"
+		fmt.Println("INFO: No ORIGIN_ALLOWED environment variable detected, defaulting to " + origin)
+	}
+	return origin
+}
 func GetPort() string {
 	var port = os.Getenv("PORT")
 	if port == "" {
