@@ -11,6 +11,13 @@ import (
 	"github.com/gorilla/handlers"
 )
 
+type Preview struct {
+    Url   	  string   `json:"url"`
+    Title         string   `json:"title"`
+    Description   string   `json:"description"`
+    Images      []string   `json:"images"`
+}
+
 func getUrlData(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	url, ok := r.Form["url"]
@@ -23,8 +30,13 @@ func getUrlData(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "can't generate preview", http.StatusBadRequest)
 		return
 	}
+	var pvw Preview
+	pvw.Url = s.Preview.Link
+	pvw.Title = s.Preview.Title
+	pvw.Description = s.Preview.Description
+	pvw.Images = s.Preview.Images
 
-	json.NewEncoder(w).Encode(s.Preview)
+	json.NewEncoder(w).Encode(pvw)
 
 }
 
