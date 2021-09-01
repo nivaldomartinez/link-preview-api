@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+  api:
+    image: golang:1.17
+    volumes:
+      - "./:/code"
+    ports:
+      - "4747:4747"
+    working_dir: /code
+    entrypoint: go run main.go

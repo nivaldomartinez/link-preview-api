@@ -6,18 +6,18 @@
 
 [link-prevue Demo Repo](https://github.com/nivaldomartinez/link-prevue-demo)
 
-## Install GoDep
+## Usage
 
-In the root project folder run the following command
+In the root project folder run the following command:
 
 ```sh
-$ go get github.com/tools/godep
+$ go run main.go
 ```
 
-and run
+or with the docker-compose:
 
 ```sh
-$ godep save
+docker-compose up
 ```
 
 ## Deploy on Heroku
